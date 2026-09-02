@@ -10,6 +10,7 @@ require_once __DIR__ . '/cngn.php';
 require_once __DIR__ . '/algorithm_taxonomy.php';
 require_once __DIR__ . '/math_physics_catalog.php';
 require_once __DIR__ . '/latex.php';
+require_once __DIR__ . '/opcode_latex.php';
 
 class CNGNScience extends CNGN
 {
@@ -44,6 +45,16 @@ class CNGNScience extends CNGN
         $copy['latex'] = CNGNLaTeXRenderer::part($part);
         $copy['lineage'] = $this->algorithmRegistry->taxonomy()->lineage($part['taxonomy_id']);
         return $copy;
+    }
+
+    public function describeOpcode($opcode)
+    {
+        return CNGNOpcodeLaTeX::describe($opcode);
+    }
+
+    public function opcodeCatalog()
+    {
+        return CNGNOpcodeLaTeX::all();
     }
 
     public function composeAlgorithm(array $desire)
